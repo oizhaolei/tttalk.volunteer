@@ -1,0 +1,16 @@
+An openfire plugin.
+
+Present web interface:
+
+1. accept translate request, send to some volunteers.<br/>
+
+2. accept the "cancel" signal, send to some volunteers.<br/>
+
+$ cd $OPENFIRE_HOME/build
+
+$ ant plugin -Dplugin=tttalk.volunteer
+
+volunteer call example:
+
+http://test:9090/plugins/tttalk.volunteer/request?volunteers=zhao,li,wang&content=good&fee=23&message_id=458757
+http://test:9090/plugins/tttalk.volunteer/cancel?volunteers=zhao,li,wang&message_id=458757

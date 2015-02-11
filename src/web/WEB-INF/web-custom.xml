@@ -1,0 +1,27 @@
+<?xml version='1.0' encoding='ISO-8859-1'?>
+<!DOCTYPE web-app PUBLIC "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN" "http://java.sun.com/dtd/web-app_2_3.dtd">
+<web-app>
+    <!-- Servlets -->
+    <servlet>
+        <servlet-name>VolunteerRequest</servlet-name>
+        <servlet-class>org.tttalk.openfire.plugin.VolunteerRequestServlet</servlet-class>
+    </servlet>
+
+    <!-- Servlet mappings -->
+    <servlet-mapping>
+        <servlet-name>VolunteerRequest</servlet-name>
+        <url-pattern>/request</url-pattern>
+    </servlet-mapping>
+    <!-- Servlets -->
+    <servlet>
+        <servlet-name>VolunteerCancelServlet</servlet-name>
+        <servlet-class>org.tttalk.openfire.plugin.VolunteerCancelServlet</servlet-class>
+    </servlet>
+
+    <!-- Servlet mappings -->
+    <servlet-mapping>
+        <servlet-name>VolunteerCancelServlet</servlet-name>
+        <url-pattern>/cancel</url-pattern>
+    </servlet-mapping>
+
+</web-app>
