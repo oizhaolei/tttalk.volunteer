@@ -6,11 +6,15 @@ Present web interface:
 
 2. accept the "cancel" signal, send to some volunteers.<br/>
 
+2. accept the "qa" signal, send to some volunteers.<br/>
+
 $ cd $OPENFIRE_HOME/build
 
 $ ant plugin -Dplugin=tttalk.volunteer
 
 volunteer call example:
 
-http://test:9090/plugins/tttalk.volunteer/request?volunteers=zhao,li,wang&content=good&fee=23&message_id=458757
-http://test:9090/plugins/tttalk.volunteer/cancel?volunteers=zhao,li,wang&message_id=458757
+http://test:9090/plugins/tttalk.volunteer/request?volunteers=volunteer1@tttalk.org/volunteer&content=good&fee=23&message_id=458757
+http://test:9090/plugins/tttalk.volunteer/cancel?volunteers=volunteer1@tttalk.org/volunteer&message_id=458757
+
+http://test:9090/plugins/tttalk.volunteer/qa?volunteers=volunteer1@tttalk.org/volunteer&qa_id=458757&answer=XXXXXXXX

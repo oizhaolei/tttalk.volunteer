@@ -20,6 +20,11 @@ import org.xmpp.packet.Message;
  * @author zhaolei
  */
 public class VolunteerPlugin implements Plugin {
+	public static final String PLUGIN_NAME = "tttalk.volunteer";
+
+	private static final String TTTALK_NAMESPACE = "http://jabber.org/protocol/tranlate";
+	private static final String TTTALK_TAG = "volunteer";
+
 	private static final Logger log = LoggerFactory
 			.getLogger(VolunteerPlugin.class);
 
@@ -56,12 +61,12 @@ public class VolunteerPlugin implements Plugin {
 		message.setSubject(subject);
 		message.setBody(subject);
 
-		Element tttalkNode = message.addChildElement("volunteer",
-				"http://jabber.org/protocol/tranlate");
+		Element tttalkNode = message.addChildElement(TTTALK_TAG,
+				TTTALK_NAMESPACE);
 		// tttalkNode.addAttribute("test", "true");
 		// tttalkNode.addAttribute("ver", "1");
 
-		tttalkNode.addAttribute("title", "cancel");
+		tttalkNode.addAttribute("title", subject);
 		tttalkNode.addAttribute("message_id", messageId);
 
 		for (String v : volunteers) {
@@ -80,11 +85,36 @@ public class VolunteerPlugin implements Plugin {
 		message.setSubject(subject);
 		message.setBody(content);
 
-		Element tttalkNode = message.addChildElement("volunteer",
-				"http://jabber.org/protocol/tranlate");
+		Element tttalkNode = message.addChildElement(TTTALK_TAG,
+				TTTALK_NAMESPACE);
+		tttalkNode.addAttribute("title", subject);
 		tttalkNode.addAttribute("message_id", messageId);
 		tttalkNode.addAttribute("fee", String.valueOf(fee));
 		
+		for (String v : volunteers) {
+			message.setTo(v);
+			log.info(message.toXML());
+			router.route(message);
+		}
+	}
+
+	public void answer(String[] volunteers, String qaId, String answer) {
+		Message message = new Message();
+		message.setFrom(getVolunteer() + "@"
+				+ server.getServerInfo().getXMPPDomain());
+		String subject = "qa";
+		message.setSubject(subject);
+		message.setBody(subject);
+
+		Element tttalkNode = message.addChildElement(TTTALK_TAG,
+				TTTALK_NAMESPACE);
+		// tttalkNode.addAttribute("test", "true");
+		// tttalkNode.addAttribute("ver", "1");
+
+		tttalkNode.addAttribute("title", subject);
+		tttalkNode.addAttribute("qa_id", qaId);
+		tttalkNode.addAttribute("answer", answer);
+
 		for (String v : volunteers) {
 			message.setTo(v);
 			log.info(message.toXML());

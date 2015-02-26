@@ -10,27 +10,26 @@ import javax.servlet.http.HttpServletResponse;
 /**
  *
  */
-public class VolunteerCancelServlet extends AbstractVolunteerServlet {
-	private static final long serialVersionUID = 4000625286902414898L;
-
-
-	@Override
-	String getUri() {
-		return "/cancel";
-	}
+public class QAServlet extends AbstractVolunteerServlet {
+	private static final long serialVersionUID = 1159875340630997082L;
 
 	@Override
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		Log.info(request.toString());
 
-		String message_id = request.getParameter("message_id");
+		String qa_id = request.getParameter("qa_id");
+		String answer = request.getParameter("answer");
 		String[] volunteers = request.getParameter("volunteers").split(",");
-		plugin.cancel(volunteers, message_id);
+		plugin.answer(volunteers, qa_id, answer);
 
 		PrintWriter out = response.getWriter();
 		out.println("success");
+	}
 
+	@Override
+	String getUri() {
+		return "/qa";
 	}
 
 }
