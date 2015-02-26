@@ -22,8 +22,10 @@ import org.xmpp.packet.Message;
 public class VolunteerPlugin implements Plugin {
 	public static final String PLUGIN_NAME = "tttalk.volunteer";
 
-	private static final String TTTALK_NAMESPACE = "http://jabber.org/protocol/tranlate";
-	private static final String TTTALK_TAG = "volunteer";
+	private static final String VOLUNTEER_NAMESPACE = "http://tttalk.org/protocol/volunteer";
+	private static final String TAG_REQUEST = "request";
+	private static final String TAG_CANCEL = "cancel";
+	private static final String TAG_QA = "qa";
 
 	private static final Logger log = LoggerFactory
 			.getLogger(VolunteerPlugin.class);
@@ -61,8 +63,8 @@ public class VolunteerPlugin implements Plugin {
 		message.setSubject(subject);
 		message.setBody(subject);
 
-		Element tttalkNode = message.addChildElement(TTTALK_TAG,
-				TTTALK_NAMESPACE);
+		Element tttalkNode = message.addChildElement(TAG_CANCEL,
+				VOLUNTEER_NAMESPACE);
 		// tttalkNode.addAttribute("test", "true");
 		// tttalkNode.addAttribute("ver", "1");
 
@@ -85,8 +87,8 @@ public class VolunteerPlugin implements Plugin {
 		message.setSubject(subject);
 		message.setBody(content);
 
-		Element tttalkNode = message.addChildElement(TTTALK_TAG,
-				TTTALK_NAMESPACE);
+		Element tttalkNode = message.addChildElement(TAG_REQUEST,
+				VOLUNTEER_NAMESPACE);
 		tttalkNode.addAttribute("title", subject);
 		tttalkNode.addAttribute("message_id", messageId);
 		tttalkNode.addAttribute("fee", String.valueOf(fee));
@@ -98,22 +100,21 @@ public class VolunteerPlugin implements Plugin {
 		}
 	}
 
-	public void answer(String[] volunteers, String qaId, String answer) {
+	public void qa(String[] volunteers, String qaId, String answer) {
 		Message message = new Message();
 		message.setFrom(getVolunteer() + "@"
 				+ server.getServerInfo().getXMPPDomain());
 		String subject = "qa";
 		message.setSubject(subject);
-		message.setBody(subject);
+		message.setBody(answer);
 
-		Element tttalkNode = message.addChildElement(TTTALK_TAG,
-				TTTALK_NAMESPACE);
+		Element tttalkNode = message.addChildElement(TAG_QA,
+				VOLUNTEER_NAMESPACE);
 		// tttalkNode.addAttribute("test", "true");
 		// tttalkNode.addAttribute("ver", "1");
 
 		tttalkNode.addAttribute("title", subject);
 		tttalkNode.addAttribute("qa_id", qaId);
-		tttalkNode.addAttribute("answer", answer);
 
 		for (String v : volunteers) {
 			message.setTo(v);

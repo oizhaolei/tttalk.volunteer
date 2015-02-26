@@ -21,7 +21,7 @@ public class QAServlet extends AbstractVolunteerServlet {
 		String qa_id = request.getParameter("qa_id");
 		String answer = request.getParameter("answer");
 		String[] volunteers = request.getParameter("volunteers").split(",");
-		plugin.answer(volunteers, qa_id, answer);
+		plugin.qa(volunteers, qa_id, answer);
 
 		PrintWriter out = response.getWriter();
 		out.println("success");
