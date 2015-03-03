@@ -26,6 +26,7 @@ public class VolunteerPlugin implements Plugin {
 	private static final String TAG_REQUEST = "request";
 	private static final String TAG_CANCEL = "cancel";
 	private static final String TAG_QA = "qa";
+	private static final String TAG_ANNOUNCEMENT = "announcement";
 
 	private static final Logger log = LoggerFactory
 			.getLogger(VolunteerPlugin.class);
@@ -115,6 +116,30 @@ public class VolunteerPlugin implements Plugin {
 
 		tttalkNode.addAttribute("title", subject);
 		tttalkNode.addAttribute("qa_id", qaId);
+
+		for (String v : volunteers) {
+			message.setTo(v);
+			log.info(message.toXML());
+			router.route(message);
+		}
+	}
+
+	public void announcement(String[] volunteers, String announcementId,
+			String title) {
+		Message message = new Message();
+		message.setFrom(getVolunteer() + "@"
+				+ server.getServerInfo().getXMPPDomain());
+		String subject = "announcement";
+		message.setSubject(subject);
+		message.setBody(title);
+
+		Element tttalkNode = message.addChildElement(TAG_ANNOUNCEMENT,
+				VOLUNTEER_NAMESPACE);
+		// tttalkNode.addAttribute("test", "true");
+		// tttalkNode.addAttribute("ver", "1");
+
+		tttalkNode.addAttribute("title", subject);
+		tttalkNode.addAttribute("announcement_id", announcementId);
 
 		for (String v : volunteers) {
 			message.setTo(v);
