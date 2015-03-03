@@ -29,7 +29,7 @@ public class AnnouncementServlet extends AbstractVolunteerServlet {
 
 	@Override
 	String getUri() {
-		return "/qa";
+		return "/announcement";
 	}
 
 }
