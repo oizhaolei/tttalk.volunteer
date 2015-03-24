@@ -32,6 +32,7 @@ public abstract class AbstractVolunteerServlet extends HttpServlet {
 		AuthCheckFilter.addExclude(VolunteerPlugin.PLUGIN_NAME + getUri());
 	}
 
+	// TODO: sign check
 	abstract String getUri();
 
 	@Override
