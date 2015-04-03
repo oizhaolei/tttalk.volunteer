@@ -85,8 +85,7 @@ public class VolunteerPlugin implements Plugin {
 		}
 	}
 
-	public void request(String[] volunteers, String content, String messageId,
-			int fee) {
+	public void request(String[] volunteers, String content, String messageId) {
 		Message message = new Message();
 		message.setFrom(getVolunteer() + "@"
 				+ server.getServerInfo().getXMPPDomain());
@@ -98,7 +97,6 @@ public class VolunteerPlugin implements Plugin {
 				VOLUNTEER_NAMESPACE);
 		tttalkNode.addAttribute("title", subject);
 		tttalkNode.addAttribute("message_id", messageId);
-		tttalkNode.addAttribute("fee", String.valueOf(fee));
 		
 		for (String v : volunteers) {
 			message.setTo(v);
