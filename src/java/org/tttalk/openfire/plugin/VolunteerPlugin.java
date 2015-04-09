@@ -103,9 +103,7 @@ public class VolunteerPlugin implements Plugin {
 		}
 	}
 
-	public void updateUserPwd(String jid, String newPwd) {
-
-		String username = getUserName(jid);
+	public void updateUserPwd(String username, String newPwd) {
 		try {
 			User user = userManager.getUser(username);
 			user.setPassword(newPwd);
