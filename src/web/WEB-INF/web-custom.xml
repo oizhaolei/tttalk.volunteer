@@ -20,28 +20,6 @@
         <servlet-name>VolunteerCancelServlet</servlet-name>
         <url-pattern>/cancel</url-pattern>
     </servlet-mapping>
-    
-    <!-- qa -->
-    <servlet>
-        <servlet-name>QAServlet</servlet-name>
-        <servlet-class>org.tttalk.openfire.plugin.QAServlet</servlet-class>
-    </servlet>
-    <!-- Servlet mappings -->
-    <servlet-mapping>
-        <servlet-name>QAServlet</servlet-name>
-        <url-pattern>/qa</url-pattern>
-    </servlet-mapping>
-    
-    <!-- announcement -->
-    <servlet>
-        <servlet-name>AnnouncementServlet</servlet-name>
-        <servlet-class>org.tttalk.openfire.plugin.AnnouncementServlet</servlet-class>
-    </servlet>
-    <!-- Servlet mappings -->
-    <servlet-mapping>
-        <servlet-name>AnnouncementServlet</servlet-name>
-        <url-pattern>/announcement</url-pattern>
-    </servlet-mapping>
 
 	<!-- Servlets -->
     <servlet>
