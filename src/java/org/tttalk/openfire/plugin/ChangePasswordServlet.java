@@ -13,10 +13,10 @@ import org.slf4j.LoggerFactory;
 /**
  *
  */
-public class UpdateUserPwdServlet extends AbstractVolunteerServlet {
+public class ChangePasswordServlet extends AbstractVolunteerServlet {
 	private static final long serialVersionUID = 1159875340630997082L;
 	private static final Logger Log = LoggerFactory
-			.getLogger(UpdateUserPwdServlet.class);
+			.getLogger(ChangePasswordServlet.class);
 
 	@Override
 	protected void doGet(HttpServletRequest request,
@@ -25,7 +25,7 @@ public class UpdateUserPwdServlet extends AbstractVolunteerServlet {
 
 		String username = request.getParameter("user");
 		String newPwd = request.getParameter("new_pwd");
-		plugin.updateUserPwd(username, newPwd);
+		plugin.changePassword(username, newPwd);
 
 		PrintWriter out = response.getWriter();
 		out.println("success");
