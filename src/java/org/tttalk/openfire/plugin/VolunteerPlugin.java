@@ -34,13 +34,15 @@ public class VolunteerPlugin implements Plugin {
 			.getLogger(VolunteerPlugin.class);
 
 	private static final String TTTALK_USER_VOLUNTEER = "tttalk.user.volunteer";
+	private static final String REQUEST_TAG = "request";
+	private static final String RECEIVED_NAMASPACE = "urn:xmpp:receipts";
 
 	public String getVolunteer() {
 		return JiveGlobals.getProperty(TTTALK_USER_VOLUNTEER);
 	}
 
 	private final XMPPServer server;
-	private UserManager userManager;
+	private final UserManager userManager;
 
 	public VolunteerPlugin() {
 		server = XMPPServer.getInstance();
@@ -77,6 +79,8 @@ public class VolunteerPlugin implements Plugin {
 		tttalkNode.addAttribute("title", subject);
 		tttalkNode.addAttribute("message_id", messageId);
 
+		addRequestReceipts(message);
+
 		for (String v : volunteers) {
 			message.setTo(v);
 			log.info(message.toXML());
@@ -96,7 +100,9 @@ public class VolunteerPlugin implements Plugin {
 				VOLUNTEER_NAMESPACE);
 		tttalkNode.addAttribute("title", subject);
 		tttalkNode.addAttribute("message_id", messageId);
-		
+
+		addRequestReceipts(message);
+
 		for (String v : volunteers) {
 			message.setTo(v);
 			log.info(message.toXML());
@@ -124,7 +130,15 @@ public class VolunteerPlugin implements Plugin {
 			log.error(username, e);
 		}
 	}
+
 	private String getUserName(String jid) {
 		return jid.substring(0, jid.indexOf('@'));
+	}
+
+	private void addRequestReceipts(Message message) {
+		if (message.getID() == null) {
+			message.setID(String.valueOf(System.currentTimeMillis()));
+		}
+		message.addChildElement(REQUEST_TAG, RECEIVED_NAMASPACE);
 	}
 }
