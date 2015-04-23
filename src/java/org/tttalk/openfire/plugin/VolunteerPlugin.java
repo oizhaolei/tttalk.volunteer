@@ -127,7 +127,7 @@ public class VolunteerPlugin implements Plugin {
 			log.info(String.format("createAccount:%s,%s", user.getUID(),
 					user.getUsername()));
 		} catch (UserAlreadyExistsException e) {
-			log.error(username, e);
+			log.error(username + " UserAlreadyExists.");
 		}
 	}
 
