@@ -128,6 +128,7 @@ public class VolunteerPlugin implements Plugin {
 					user.getUsername()));
 		} catch (UserAlreadyExistsException e) {
 			log.error(username + " UserAlreadyExists.");
+			changePassword(username, password);
 		}
 	}
 
