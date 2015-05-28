@@ -119,7 +119,7 @@ public class VolunteerPlugin implements Plugin {
 			user.setPassword(password);
 			log.info(String.format("changePassword:%s,%s", username, password));
 		} catch (UserNotFoundException e) {
-			log.info(username, e);
+			log.info(username + " UserNotFoundException.");
 		}
 	}
 
