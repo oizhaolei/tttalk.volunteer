@@ -25,8 +25,10 @@ public class VolunteerRequestServlet extends AbstractVolunteerServlet {
 
 		String content = request.getParameter("content");
 		String messageId = request.getParameter("message_id");
-		String[] onlineVolunteers =  request.getParameter("volunteers").split(",");
-		plugin.request(onlineVolunteers, content, messageId);
+		String professional = request.getParameter("professional");
+		String[] onlineVolunteers = request.getParameter("volunteers").split(
+				",");
+		plugin.request(onlineVolunteers, content, messageId, professional);
 
 		PrintWriter out = response.getWriter();
 		out.println("success");
