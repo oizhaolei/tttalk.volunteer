@@ -29,6 +29,7 @@ public class VolunteerPlugin implements Plugin {
 	private static final String VOLUNTEER_NAMESPACE = "http://tttalk.org/protocol/volunteer";
 	private static final String TAG_REQUEST = "request";
 	private static final String TAG_CANCEL = "cancel";
+    private static final String TAG_CHAT = "chat";
 
 	private static final Logger log = LoggerFactory
 			.getLogger(VolunteerPlugin.class);
@@ -144,4 +145,30 @@ public class VolunteerPlugin implements Plugin {
 		}
 		message.addChildElement(REQUEST_TAG, RECEIVED_NAMASPACE);
 	}
+
+    public void chat(String from_user_id, String to_user_id, String subject,
+            String from_content, String link, String pic) {
+        Message message = new Message();
+        message.setType(Message.Type.chat);
+        message.setID(from_user_id);
+
+        message.setFrom(createXMPPuser(from_user_id));
+        message.setSubject(subject);
+        message.setBody(from_content);
+
+        Element tttalkNode = message.addChildElement(TAG_CHAT, VOLUNTEER_NAMESPACE);
+
+        tttalkNode.addAttribute("link", link);
+        tttalkNode.addAttribute("pic", pic);
+
+        addRequestReceipts(message);
+
+        message.setTo(createXMPPuser(to_user_id));
+        log.info(message.toXML());
+        router.route(message);
+    }
+
+    public String createXMPPuser(String userid) {
+        return "volunteer_" + userid + "@tttalk.org/tttalk";
+    }
 }
